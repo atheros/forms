@@ -1,10 +1,10 @@
 {
   "name": "@core-framework/forms",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "description": "Form handling and validation for Core Framework",
   "main": "./src/index.js",
-    "files": [
+  "files": [
     "src/"
   ],
   "engines": {
@@ -22,8 +22,8 @@
     "core",
     "framework",
     "core-framework",
-    "modules",
-    "module"
+    "forms",
+    "form"
   ],
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",

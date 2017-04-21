@@ -15,7 +15,7 @@ class FormInstance {
 		}
 
 		for (let field of this.form.fields) {
-			if (data.hasOwnProperty(field.name)) {
+			if (typeof data[field.name] !== 'undefined') {
 				if (field.isCheckbox) {
 					this.values[field.name] = !!data[field.name];
 				} else {
