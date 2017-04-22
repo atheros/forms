@@ -5,7 +5,9 @@ let FormInstance = require('../src/FormInstance');
 
 let Form1 = new Form([
 	Form.field('field1', 'f1'),
-	Form.field('field2', 'f2')
+	Form.field('field2', 'f2'),
+	Form.field('field3'),
+	Form.field('field4').checkbox()
 ]);
 
 let Form2 = new Form([
@@ -86,7 +88,7 @@ describe('FormInstance.js', () => {
 		it('can set values from defaults', () => {
 			let form = Form1.createInstance();
 
-			form.setData({}, true);
+			form.setData({});
 
 			assert.property(form.values, 'field1');
 			assert.equal(form.values.field1, 'f1');
@@ -95,28 +97,16 @@ describe('FormInstance.js', () => {
 			assert.equal(form.values.field2, 'f2');
 		});
 
-		it('can won\'t set defaults if not asked to', () => {
-			let form = Form1.createInstance();
-
-			form.setData({}, false);
-
-			assert.property(form.values, 'field1');
-			assert.equal(form.values.field1, null);
-
-			assert.property(form.values, 'field2');
-			assert.equal(form.values.field2, null);
-		});
-
 		it('accepts null instead of data', () => {
 			let form = Form1.createInstance();
 
 			form.setData(null);
 
 			assert.property(form.values, 'field1');
-			assert.equal(form.values.field1, null);
+			assert.equal(form.values.field1, 'f1');
 
 			assert.property(form.values, 'field2');
-			assert.equal(form.values.field2, null);
+			assert.equal(form.values.field2, 'f2');
 		});
 	});
 

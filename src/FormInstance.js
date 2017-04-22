@@ -9,24 +9,34 @@ class FormInstance {
 		this.isValid = true;
 	}
 
-	setData(data, useDefaults = false) {
+	setData(data) {
 		if (!data) {
 			data = {};
 		}
 
 		for (let field of this.form.fields) {
-			if (typeof data[field.name] !== 'undefined') {
+			let value = data[field.name];
+			let type = typeof value;
+
+			// Use default value if needed.
+			if (type === 'undefined') {
+				value = field.defaultValue;
+				type = typeof value;
+			}
+
+			if (value !== null) {
 				if (field.isCheckbox) {
-					this.values[field.name] = !!data[field.name];
+					this.values[field.name] = !!value;
+				} else if (type === 'string' && field.doTrim) {
+					this.values[field.name] = value.trim();
 				} else {
-					this.values[field.name] = data[field.name];
+					this.values[field.name] = value;
 				}
 			} else if (field.isCheckbox) {
 				// When chekbox is not set, the field won't be available in http body.
-				this.values[field.name] = typeof field.defaultValue === 'boolean' ? field.defaultValue : false;
-			} else if (useDefaults) {
-				this.values[field.name] = field.defaultValue;
+				this.values[field.name] = false;
 			} else {
+				// No value given and no default value, set to null.
 				this.values[field.name] = null;
 			}
 		}

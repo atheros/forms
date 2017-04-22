@@ -115,7 +115,9 @@ describe('Form.js', () => {
 	});
 
 	describe('createInstance()', () => {
-		let someForm = new Form();
+		let someForm = new Form([
+			Form.field('foo')
+		]);
 
 		it('exists', () => {
 			assert.property(someForm, 'createInstance');
@@ -128,6 +130,15 @@ describe('Form.js', () => {
 
 			assert.isObject(instance);
 			assert.ok(instance instanceof FormInstance);
+		});
+
+		it('can set data', () => {
+			let instance = someForm.createInstance({foo: 'bar'});
+
+			assert.isObject(instance);
+			assert.ok(instance instanceof FormInstance);
+			assert.property(instance.values, 'foo');
+			assert.equal(instance.values.foo, 'bar');
 		});
 	});
 });

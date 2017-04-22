@@ -54,6 +54,12 @@ class Form {
 		return lodash.map(this.fields, 'name');
 	}
 
+	/**
+	 * Return field by name or null.
+	 *
+	 * @param {string} name Field name.
+	 * @returns {Field} Field or null.
+	 */
 	getField(name) {
 		for(let field of this.fields) {
 			if (field.name === name) {
@@ -64,8 +70,18 @@ class Form {
 		return null;
 	}
 
-	createInstance() {
-		return new FormInstance(this);
+	/**
+	 * Create for instance and populate it with data and default values.
+	 *
+	 * @param {object} [data] Form data.
+	 * @returns {FormInstance} Form instance.
+	 */
+	createInstance(data = null) {
+		let instance = new FormInstance(this);
+
+		instance.setData(data);
+
+		return instance;
 	}
 }
 

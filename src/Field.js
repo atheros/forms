@@ -7,7 +7,7 @@ class Field {
 	constructor(name, defaultValue) {
 		this.name = name;
 		this.defaultValue = typeof defaultValue === 'undefined' ? null : defaultValue;
-
+		this.doTrim = true;
 		this.actions = [];
 
 		this.isCheckbox = false;
@@ -22,6 +22,17 @@ class Field {
 	 */
 	checkbox() {
 		this.isCheckbox = true;
+
+		return this;
+	}
+
+	/**
+	 * Mark this field so it's value won't get trimmed.
+	 *
+	 * @returns {Field} Chained Field object.
+	 */
+	noTrim() {
+		this.doTrim = false;
 
 		return this;
 	}

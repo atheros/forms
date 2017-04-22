@@ -39,6 +39,38 @@ describe('Field.js', () => {
 		});
 	});
 
+	describe('noTrim()', () => {
+		let someField = new Field('foo', ' bar ');
+
+		it('exists', () => {
+			assert.property(someField, 'noTrim');
+			assert.isFunction(someField.noTrim);
+		});
+
+		it('marks field to not trim', () => {
+			let field = Form.field('foo', ' trim ').noTrim();
+
+			assert.isObject(field);
+			assert.ok(field instanceof Field);
+			assert.property(field, 'doTrim');
+			assert.equal(field.doTrim, false);
+		});
+
+		it('will prevent trim', () => {
+			let MyForm = new Form([Form.field('foo', ' trim ').noTrim()]);
+			let form = MyForm.createInstance();
+
+			assert.equal(form.values.foo, ' trim ');
+		});
+
+		it('will trim when not called', () => {
+			let MyForm = new Form([Form.field('foo', ' trim ')]);
+			let form = MyForm.createInstance();
+
+			assert.equal(form.values.foo, 'trim');
+		});
+	});
+
 	describe('notEmpty()', () => {
 		it('exists', () => {
 			let field = new Field('foo');

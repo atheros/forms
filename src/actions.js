@@ -78,20 +78,9 @@ function checkEmail(field, options) {
 	return true;
 }
 
-
-function doTrim(field) {
-	if (typeof field.value === 'string') {
-		field.value = field.value.trim();
-	}
-
-	return true;
-}
-
 module.exports = {
 	checkNotEmpty: checkNotEmpty,
 	checkMaxLength: checkMaxLength,
 	checkMinLength: checkMinLength,
 	checkEmail: checkEmail,
-
-	doTrim: doTrim
 };
