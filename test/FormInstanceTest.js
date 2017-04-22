@@ -170,10 +170,12 @@ describe('FormInstance.js', () => {
 			assert.isFunction(form.reset);
 		});
 
-		it('clears all form data', () => {
+		it('clears all messages, valid flag and sets default values', () => {
 			let form = Form3.createInstance();
 
-			form.setData(null, true);
+			form.setData({
+				field2: 'foo bar car',
+			});
 
 			let result = form.validate();
 
@@ -192,10 +194,12 @@ describe('FormInstance.js', () => {
 			assert.notProperty(form.messages, 'field3');
 			assert.notProperty(form.messages, 'field4');
 
-			assert.notProperty(form.values, 'field1');
-			assert.notProperty(form.values, 'field2');
-			assert.notProperty(form.values, 'field3');
-			assert.notProperty(form.values, 'field4');
+			assert.property(form.values, 'field1');
+			assert.property(form.values, 'field2');
+			assert.property(form.values, 'field3');
+			assert.property(form.values, 'field4');
+
+			assert.equal(form.values.field2, 'foo bar');
 
 			assert.ok(form.isValid);
 		});

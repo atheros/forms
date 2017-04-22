@@ -88,7 +88,7 @@ class FormInstance {
 	/**
 	 * Reset form instance state.
 	 *
-	 * Removes values, messages and reset valid flag.
+	 * Removes messages, reset valid flag and sets default values.
 	 *
 	 * @returns {undefined}
 	 */
@@ -96,6 +96,9 @@ class FormInstance {
 		this.values = {};
 		this.messages = {};
 		this.isValid = true;
+
+		// Set default values.
+		this.setData(null);
 	}
 
 	/**
